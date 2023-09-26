@@ -1,0 +1,44 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public class WordFrequencyCounter
+{
+    public static void Main()
+    {
+        Console.WriteLine("Введите текст:");
+        string text = Console.ReadLine();
+
+        // Удаление знаков препинания и приведение к нижнему регистру
+        string[] words = text.Split(new[] { ' ', ',', '.', ':', ';', '!', '?' }, StringSplitOptions.RemoveEmptyEntries)
+            .Select(word => word.ToLower())
+            .ToArray();
+
+        // Подсчёт частоты встречаемости слов
+        Dictionary<string, int> wordFrequencies = new Dictionary<string, int>();
+        foreach (string word in words)
+        {
+            if (wordFrequencies.ContainsKey(word))
+            {
+                wordFrequencies[word]++;
+            }
+            else
+            {
+                wordFrequencies[word] = 1;
+            }
+        }
+
+        // Получение самых часто встречающихся слов
+        var top10Words = wordFrequencies.OrderByDescending(pair => pair.Value)
+            .Take(10)
+            .Select(pair => pair.Key)
+            .ToArray();
+
+        // Вывод результатов
+        Console.WriteLine("10 самых часто встречающихся слов:");
+        foreach (string word in top10Words)
+        {
+            Console.WriteLine(word);
+        }
+    }
+}
