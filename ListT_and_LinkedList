@@ -1,0 +1,39 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Diagnostics;
+
+namespace ListT_and_LinkedList
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            const int N = 1000000;
+            List<int> list = new List<int>();
+            LinkedList<int> linkedList = new LinkedList<int>();
+
+            Stopwatch listStopwatch = new Stopwatch();
+            listStopwatch.Start();
+            for (int i = 0; i < N; i++)
+            {
+                list.Add(i);
+            }
+            listStopwatch.Stop();
+
+            Stopwatch linkedListStopwatch = new Stopwatch();
+            linkedListStopwatch.Start();
+            for (int i = 0; i < N; i++)
+            {
+                linkedList.AddLast(i);
+            }
+            linkedListStopwatch.Stop();
+            Console.WriteLine($"Вставка в List: {listStopwatch.ElapsedMilliseconds} мс");
+            Console.WriteLine($"Вставка в LinkedList: {linkedListStopwatch.ElapsedMilliseconds} мс");
+            Console.ReadKey();
+
+        }
+    }
+}
